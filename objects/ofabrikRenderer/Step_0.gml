@@ -14,35 +14,19 @@ mousePositionCaptured = true;
 
 // Reach forward towards the mouse position.
 for (var i = 0; i < POINT_COUNT - 1; i++) {
-	var head = points[i];
-	var tail = points[i + 1];
-	var segmentLength = point_distance(tail.x, tail.y, head.x, head.y);
+	var reachResult = fabrikReach(points[i], points[i + 1], target);
 
-	var directionFromTargetToTail = point_direction(target.x, target.y, tail.x, tail.y);
-	var newTail = {
-		x: target.x + lengthdir_x(segmentLength, directionFromTargetToTail),
-		y: target.y + lengthdir_y(segmentLength, directionFromTargetToTail)
-	};
-
-	points[i] = target;
-	target = newTail;
+	points[i] = reachResult.newHead;
+	target = reachResult.newTail;
 }
 points[POINT_COUNT - 1] = target;
 
 // Reach backward towards the anchor.
 target = anchor;
 for (var i = POINT_COUNT - 1; i >= 1; i--) {
-	var head = points[i];
-	var tail = points[i - 1];
-	var segmentLength = point_distance(tail.x, tail.y, head.x, head.y);
+	var reachResult = fabrikReach(points[i], points[i - 1], target);
 
-	var directionFromTargetToTail = point_direction(target.x, target.y, tail.x, tail.y);
-	var newTail = {
-		x: target.x + lengthdir_x(segmentLength, directionFromTargetToTail),
-		y: target.y + lengthdir_y(segmentLength, directionFromTargetToTail)
-	};
-
-	points[i] = target;
-	target = newTail;
+	points[i] = reachResult.newHead;
+	target = reachResult.newTail;
 }
 points[0] = target;
