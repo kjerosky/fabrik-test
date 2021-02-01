@@ -1,4 +1,4 @@
-SEGMENT_LENGTH = 10;
+SEGMENT_LENGTH = 20;
 
 anchor = {
 	x: oCamera.VIEW_WIDTH / 2,
@@ -19,3 +19,5 @@ for (var i = POINT_COUNT - 2; i >= 0; i--) {
 		y: points[i + 1].y
 	};
 }
+
+mousePositionCaptured = false;
