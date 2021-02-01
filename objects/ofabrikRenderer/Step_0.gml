@@ -12,18 +12,18 @@ if (!mousePositionCaptured && target.x <= 0 && target.y <= 0) {
 }
 mousePositionCaptured = true;
 
-var head = points[0];
-var tail = points[1];
+for (var i = 0; i < POINT_COUNT - 1; i++) {
+	var head = points[i];
+	var tail = points[i + 1];
+	var segmentLength = point_distance(tail.x, tail.y, head.x, head.y);
 
-var segmentLength = point_distance(tail.x, tail.y, head.x, head.y);
+	var directionFromTargetToTail = point_direction(target.x, target.y, tail.x, tail.y);
+	var newTail = {
+		x: target.x + lengthdir_x(segmentLength, directionFromTargetToTail),
+		y: target.y + lengthdir_y(segmentLength, directionFromTargetToTail)
+	};
 
-var newHead = target;
-var directionFromNewHeadToTail = point_direction(newHead.x, newHead.y, tail.x, tail.y);
-
-var newTail = {
-	x: newHead.x + lengthdir_x(segmentLength, directionFromNewHeadToTail),
-	y: newHead.y + lengthdir_y(segmentLength, directionFromNewHeadToTail)
-};
-
-points[0] = newHead;
-points[1] = newTail;
+	points[i] = target;
+	target = newTail;
+}
+points[POINT_COUNT - 1] = target;

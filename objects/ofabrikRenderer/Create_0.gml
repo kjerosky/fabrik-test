@@ -7,7 +7,7 @@ anchor = {
 
 // The last point is the anchor, and the first is the one actively
 // reaching towards the target.
-POINT_COUNT = 2;
+POINT_COUNT = 5;
 points = array_create(POINT_COUNT);
 points[POINT_COUNT - 1] = {
 	x: anchor.x,
