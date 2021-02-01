@@ -1,3 +1,5 @@
+POINT_DRAW_RADIUS = 2;
+
 SEGMENT_LENGTH = 20;
 
 anchor = {

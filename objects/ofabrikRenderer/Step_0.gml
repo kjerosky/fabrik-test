@@ -12,6 +12,7 @@ if (!mousePositionCaptured && target.x <= 0 && target.y <= 0) {
 }
 mousePositionCaptured = true;
 
+// Reach forward towards the mouse position.
 for (var i = 0; i < POINT_COUNT - 1; i++) {
 	var head = points[i];
 	var tail = points[i + 1];
@@ -27,3 +28,21 @@ for (var i = 0; i < POINT_COUNT - 1; i++) {
 	target = newTail;
 }
 points[POINT_COUNT - 1] = target;
+
+// Reach backward towards the anchor.
+target = anchor;
+for (var i = POINT_COUNT - 1; i >= 1; i--) {
+	var head = points[i];
+	var tail = points[i - 1];
+	var segmentLength = point_distance(tail.x, tail.y, head.x, head.y);
+
+	var directionFromTargetToTail = point_direction(target.x, target.y, tail.x, tail.y);
+	var newTail = {
+		x: target.x + lengthdir_x(segmentLength, directionFromTargetToTail),
+		y: target.y + lengthdir_y(segmentLength, directionFromTargetToTail)
+	};
+
+	points[i] = target;
+	target = newTail;
+}
+points[0] = target;

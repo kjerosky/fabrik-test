@@ -7,5 +7,5 @@ for (var i = 0; i < POINT_COUNT - 1; i++) {
 
 draw_set_color(c_lime);
 for (var i = 0; i < POINT_COUNT; i++) {
-	draw_point(points[i].x, points[i].y);
+	draw_circle(points[i].x, points[i].y, POINT_DRAW_RADIUS, false);
 }
